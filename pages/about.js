@@ -1,5 +1,4 @@
-import React from 'react';
-import Link from 'next/link';
+import Link from 'next/link'
 
 /* middleware */
 import {
@@ -7,17 +6,15 @@ import {
   getAppCookies,
   verifyToken,
   setLogout,
-} from '../middleware/utils';
+} from '../middleware/utils'
 
 /* components */
-import Layout from '../components/layout/Layout';
+import Layout from '../components/layout/Layout'
+import Nav from '../components/nav/Nav'
+import Continue from "../components/continue/Continue"
 
 export default function About(props) {
   const { profile } = props;
-
-  function handleOnClickLogout(e) {
-    setLogout(e);
-  }
 
   return (
     <Layout title="Next.js with JWT Authentication | About Page">
@@ -25,17 +22,10 @@ export default function About(props) {
         <main>
           <h1 className="title">About Page</h1>
           {!profile ? (
-            <a href="/">Login to continue</a>
+            <Continue />
           ) : (
             <div>
-              <div style={{ margin: '.5rem 0rem' }}>
-                <Link href={{ pathname: '/' }}>
-                  <a style={{ marginRight: '.75rem' }}>&bull; Home Page</a>
-                </Link>
-                <a href="#" onClick={e => handleOnClickLogout(e)}>
-                  &bull; Logout
-                </a>
-              </div>
+              <Nav />
               <div style={{ textAlign: 'left' }}>
                 <fieldset>
                   <legend>

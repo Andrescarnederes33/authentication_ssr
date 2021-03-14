@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import Cookies from 'js-cookie';
+import { useState, Fragment } from 'react'
+import Link from 'next/link'
+import Router from 'next/router'
+import Cookies from 'js-cookie'
 
 /* middleware */
 import {
@@ -9,11 +9,12 @@ import {
   getAppCookies,
   verifyToken,
   setLogout,
-} from '../middleware/utils';
+} from '../middleware/utils'
 
 /* components */
-import FormLogin from '../components/form/FormLogin';
-import Layout from '../components/layout/Layout';
+import Nav from "../components/nav/Nav"
+import FormLogin from '../components/form/FormLogin'
+import Layout from '../components/layout/Layout'
 
 const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,2|3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -44,6 +45,7 @@ const FORM_DATA_LOGIN = {
 };
 
 export default function Home(props) {
+  
   const { baseApiUrl, profile } = props;
   const [stateFormData, setStateFormData] = useState(FORM_DATA_LOGIN);
   const [stateFormError, setStateFormError] = useState([]);
@@ -217,7 +219,7 @@ export default function Home(props) {
           </h1>
           <h2>JWT Authentication</h2>
           {!profile ? (
-            <>
+            <Fragment>
               <h3>Login to continue</h3>
               <p className="description">
                 Use : <code>example1@example.com</code> or{' '}
@@ -236,17 +238,10 @@ export default function Home(props) {
                   }}
                 />
               </div>
-            </>
-          ) : (
-            <div>
-              <Link href={{ pathname: '/about' }}>
-                <a style={{ marginRight: '.75rem' }}>&bull; About Page</a>
-              </Link>
-              <a href="#" onClick={e => handleOnClickLogout(e)}>
-                &bull; Logout
-              </a>
-            </div>
-          )}
+            </Fragment>
+          ) : ( 
+            <Nav /> 
+            )}
         </main>
       </div>
     </Layout>
